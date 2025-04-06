@@ -36,7 +36,7 @@ Admin juga dapat mengelola semua data yang masuk seperti pengguna, layanan, dan 
 
 Berikut adalah ERD dari aplikasi Zamora Kicks Care:
 
-![ERD Zamora Kicks Care](.image.png)
+![ERD Zamora Kicks Care](./image.png)
 
 **Tabel:**
 
