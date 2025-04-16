@@ -1,6 +1,6 @@
 # Zamora Kicks Care 👟🧼
 
-Zamora Kicks Care adalah website layanan cuci sepatu yang modern. Website ini dirancang untuk memudahkan pengguna dalam memesan layanan pencucian sepatu serta mengelola layanan tersebut melalui sistem admin dan user.
+Zamora Kicks Care adalah website layanan cuci sepatu modern yang dirancang khusus untuk pengguna yang ingin memesan layanan pencucian sepatu secara online dengan mudah dan cepat.
 
 ---
 
@@ -9,10 +9,7 @@ Zamora Kicks Care adalah website layanan cuci sepatu yang modern. Website ini di
 Zamora Kicks Care membantu pelanggan untuk:
 - Mendaftar dan login sebagai user
 - Memilih layanan cuci sepatu
-- Mengunggah foto sepatu mereka
-- Melacak status pesanan
-
-Admin juga dapat mengelola semua data yang masuk seperti pengguna, layanan, dan pesanan.
+- Mengisi detail pesanan
 
 ---
 
@@ -21,16 +18,8 @@ Admin juga dapat mengelola semua data yang masuk seperti pengguna, layanan, dan 
 ### Untuk User:
 - Registrasi dan login
 - Melihat daftar layanan cuci sepatu
-- Melakukan pemesanan (upload foto sepatu)
-- Melihat status pesanan mereka
+- Melakukan pemesanan dengan data lengkap
 
-### Untuk Admin:
-- Login sebagai admin
-- CRUD layanan cuci sepatu
-- Melihat dan memperbarui status pesanan
-- Mengelola data user
-
----
 
 ## 🗂 Entity Relationship Diagram (ERD)
 
@@ -45,7 +34,7 @@ Berikut adalah ERD dari aplikasi Zamora Kicks Care:
   - `name`
   - `email`
   - `password`
-  - `role` (`admin` / `user`)
+  - `role`
 
 - `services`
   - `id` (PK)
@@ -55,10 +44,11 @@ Berikut adalah ERD dari aplikasi Zamora Kicks Care:
 
 - `orders`
   - `id` (PK)
-  - `user_id` (FK → users)
-  - `service_id` (FK → services)
-  - `status`
-  - `photo_url`
+  - `user_id` (FK → users.id)
+  - `service_id` (FK → services.id)
+  - `name`
+  - `address`
+  - `shoe_brand`
   - `created_at`
 
 ---
@@ -76,7 +66,7 @@ Berikut adalah ERD dari aplikasi Zamora Kicks Care:
 
 **Database:**
 - PostgreSQL
-- Supabase (jika di-host online)
+- Supabase 
 
 **Tools:**
 - DBeaver (untuk manajemen database)
