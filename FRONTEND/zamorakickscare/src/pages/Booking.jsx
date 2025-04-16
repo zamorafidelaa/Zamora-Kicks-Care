@@ -145,13 +145,9 @@ const Booking = () => {
 
   return (
     <div className="container mx-auto px-4 py-12 mt-20">
-      <h1 className="text-3xl font-bold text-center text-blue-700 mb-10">
-        Order Cuci Sepatu
-      </h1>
-
-      <div className="bg-white p-6 rounded-2xl shadow-lg mb-12 max-w-2xl mx-auto">
-        <h2 className="text-2xl font-semibold text-blue-700 text-center mb-4">
-          {editingOrderId ? "Edit Pesanan" : "Buat Pesanan Baru"}
+      <div className="bg-white p-8 rounded-2xl shadow-lg mb-12 max-w-3xl mx-auto">
+        <h2 className="text-2xl font-semibold text-blue-700 text-center mb-6">
+          {editingOrderId ? "Edit Pesanan Anda" : "Form Pemesanan Cuci Sepatu"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -159,7 +155,7 @@ const Booking = () => {
             name="name"
             value={newOrder.name}
             onChange={handleChange}
-            placeholder="Nama"
+            placeholder="Nama Lengkap"
             className="w-full px-4 py-2 border rounded-lg shadow-sm"
             required
           />
@@ -168,7 +164,7 @@ const Booking = () => {
             name="address"
             value={newOrder.address}
             onChange={handleChange}
-            placeholder="Alamat"
+            placeholder="Alamat Lengkap"
             className="w-full px-4 py-2 border rounded-lg shadow-sm"
             required
           />
@@ -188,7 +184,7 @@ const Booking = () => {
             className="w-full px-4 py-2 border rounded-lg shadow-sm"
             required
           >
-            <option value="">Pilih Layanan Cuci</option>
+            <option value="">Pilih Layanan</option>
             {services.map((service) => (
               <option key={service.id} value={service.id}>
                 {service.name} - {service.price} IDR
@@ -215,64 +211,69 @@ const Booking = () => {
         </form>
       </div>
 
-      <div className="mb-8 max-w-lg mx-auto relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Cari pesanan berdasarkan nama..."
-          className="w-full pl-10 pr-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <h2 className="text-2xl font-semibold text-blue-700 mb-6 text-center">
-          Daftar Pesanan Anda
+      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-6xl mx-auto">
+        <h2 className="text-2xl font-semibold text-blue-700 mb-4 text-center">
+          Riwayat Pemesanan Anda
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {orders
-            .filter((order) =>
-              order.name.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-            .map((order) => (
-              <div
-                key={order.id}
-                className="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition"
-              >
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  {order.name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-1">
-                  <strong>Alamat:</strong> {order.address}
-                </p>
-                <p className="text-sm text-gray-600 mb-1">
-                  <strong>Merk Sepatu:</strong> {order.shoe_brand}
-                </p>
-                <p className="text-sm text-gray-600 mb-1">
-                  <strong>Layanan ID:</strong> {order.service_id}
-                </p>
-                <p className="text-sm text-gray-600 mb-4">
-                  <strong>Waktu Pesan:</strong>{" "}
-                  {new Date(order.created_at).toLocaleString()}
-                </p>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleEditOrder(order.id)}
-                    className="flex-1 bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteOrder(order.id)}
-                    className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
-                  >
-                    Hapus
-                  </button>
-                </div>
-              </div>
-            ))}
+
+        <div className="mb-6 max-w-lg mx-auto relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Cari berdasarkan nama..."
+            className="w-full pl-10 pr-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
+
+        {orders.length === 0 ? (
+          <p className="text-center text-gray-500">Belum ada pesanan</p>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {orders
+              .filter((order) =>
+                order.name.toLowerCase().includes(searchQuery.toLowerCase())
+              )
+              .map((order) => (
+                <div
+                  key={order.id}
+                  className="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition"
+                >
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                    {order.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-1">
+                    <strong>Alamat:</strong> {order.address}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-1">
+                    <strong>Merk Sepatu:</strong> {order.shoe_brand}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-1">
+                    <strong>Layanan ID:</strong> {order.service_id}
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    <strong>Waktu Pesan:</strong>{" "}
+                    {new Date(order.created_at).toLocaleString()}
+                  </p>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={() => handleEditOrder(order.id)}
+                      className="flex-1 bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteOrder(order.id)}
+                      className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+                    >
+                      Hapus
+                    </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
