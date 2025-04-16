@@ -21,9 +21,16 @@ export default function Service() {
         <h2 className="text-2xl sm:text-3xl font-bold text-blue-900">
           Cuci dan Treatment Sepatu
         </h2>
-        <p className="mt-4 text-lg text-blue-600">Daftar Harga</p>
+        <a
+          href="https://drive.google.com/file/d/1ceXhqlhu6qR4DhxK4j31MMILVAinP_wb/view"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Lihat Daftar Harga
+          </button>
+        </a>
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 px-4">
         <div className="border border-blue-300 p-4 rounded-lg shadow-lg text-center bg-white max-w-[260px] mx-auto transition-all transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="mb-4">
